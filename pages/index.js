@@ -37,7 +37,7 @@ function Blank() {
                                                 <div class="earn_possibilities-content-img">
                                                     <img src="./images/brand/8.svg" alt="" />
                                                 </div>
-                                                <Link href="/offer"><a class="wave-effect">Enter</a></Link>
+                                                <Link href="/shop"><a class="wave-effect">Enter</a></Link>
                                             </div>
                                         </div>
                                         <div class="col">

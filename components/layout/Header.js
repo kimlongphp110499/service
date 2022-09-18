@@ -24,9 +24,8 @@ function Header() {
     
     if (token) {
         loginButton = 
-        <div class="dashboard_log my-2">
-        <div class="d-flex align-items-center">
-            <div class="account_money">
+      
+            <><div class="account_money">
                 <ul>
                     <li class="crypto">
                         <span>2500</span>
@@ -36,48 +35,41 @@ function Header() {
                         <span>4000 USD</span>
                     </li>
                 </ul>
-            </div>
-            <div class="profile_log dropdown" ref={domNode}>
-                <div class="user" onClick={handleOpen} >
-                    <span class="thumb"><i class="la la-user"></i></span>
-                    <span class="name">Thomas Christ</span>
-                    <span class="arrow"><i class="la la-angle-down"></i></span>
-                </div>
-                <div class={openClass ? "dropdown-menu show dropdown-menu-end" : "dropdown-menu dropdown-menu-end"} style={{ "right": "0", "left": "auto" }}>
-                    <Link href="/profile"><a class="dropdown-item">
-                        <i class="la la-user"></i>
-                        Profile
-                    </a></Link>
-                    <Link href="/history"><a class="dropdown-item">
-                        <i class="la la-book"></i>
-                        History
-                    </a></Link>
-                    <Link href="/settings"><a class="dropdown-item">
-                        <i class="la la-cog"></i>
-                        Settings
-                    </a></Link>
-                    <Link href="/"><a class="dropdown-item logout">
-                        <i class="la la-sign-out"></i>
-                        Logout
-                    </a></Link>
-                </div>
-            </div>
-        </div>
-    </div>
+            </div><div class="profile_log dropdown" ref={domNode}>
+                    <div class="user" onClick={handleOpen}>
+                        <span class="thumb"><i class="la la-user"></i></span>
+                        <span class="name">Thomas Christ</span>
+                        <span class="arrow"><i class="la la-angle-down"></i></span>
+                    </div>
+                    <div class={openClass ? "dropdown-menu show dropdown-menu-end" : "dropdown-menu dropdown-menu-end"} style={{ "right": "0", "left": "auto" }}>
+                        <Link href="/profile"><a class="dropdown-item">
+                            <i class="la la-user"></i>
+                            Profile
+                        </a></Link>
+                        <Link href="/history"><a class="dropdown-item">
+                            <i class="la la-book"></i>
+                            History
+                        </a></Link>
+                        <Link href="/settings"><a class="dropdown-item">
+                            <i class="la la-cog"></i>
+                            Settings
+                        </a></Link>
+                        <Link href="/"><a class="dropdown-item logout">
+                            <i class="la la-sign-out"></i>
+                            Logout
+                        </a></Link>
+                    </div>
+                </div></>
+
     } else {
-    loginButton =  
     loginButton = 
-    <div class="dashboard_log my-2">
-    <div class="d-flex align-items-center">
-        <div class="login-header">
-        <Link href="/login"><a class="nav-link btn btn-primary">Login</a></Link>
-        </div>
-        <div class="login-header">
-        <Link href="/register"><a class="nav-link btn btn-primary">Register</a></Link>
-        </div>
+   
+        <><div class="login-header" ref={domNode}>
+            <Link href="/login"><a class="nav-link btn btn-primary">Login</a></Link>
+        </div><div class="login-header" ref={domNode}>
+                <Link href="/register"><a class="nav-link btn btn-primary">Register</a></Link>
+            </div></>
        
-    </div>
-</div>
     }
     return (
         <>
@@ -107,7 +99,11 @@ function Header() {
                                         </li>
                                     </ul>
                                 </div>
+                                    <div class="dashboard_log my-2">
+                                    <div class="d-flex align-items-center">
                                 {loginButton}
+                                </div>
+                                </div>
                             </nav>
                         </div>
                     </div>
