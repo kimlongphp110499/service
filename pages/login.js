@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Layout from '../components/layout/Layout'
 import AuthService from '../service/auth.service';
 
 function Blank() {
+    const [message, setMessage] = useState(
+        <div></div>
+    )
+  const handleClick = () => setCount(1 + 1)
+
     const onSubmit = async (e) => {
         e.preventDefault();
         const resp = await AuthService.handleLogin(event.target.email.value, event.target.password.value);
+        if(resp ==  false){
+            setMessage(<div class="alert alert-danger">Login Error</div>)
+        }
+
       };
     return (
         <>
@@ -16,10 +25,8 @@ function Blank() {
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="account_setting card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Login</h4>
-                                    </div>
                                     <div class="card-body">
+                                    {message}
                                         <form onSubmit={onSubmit}>
                                             <div class="form-group">
                                                 <label>Email Address</label>

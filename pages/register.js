@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Layout from '../components/layout/Layout'
 import AuthService from '../service/auth.service';
 
 function Blank() {
+    const [message, setMessage] = useState(
+        <div></div>
+    )
     const onSubmit = async (e) => {
+        
         e.preventDefault();
         const resp = await AuthService.handleRegister(event.target.name.value, event.target.email.value, event.target.password.value);
+        if(resp ==  true){
+            setMessage(<div class="alert alert-success">Register success, please check mail!</div>)
+        }
+        else{
+            setMessage(<div class="alert alert-danger">Register Error!</div>)
+        }
       };
     return (
         <>
@@ -20,6 +30,7 @@ function Blank() {
                                         <h4 class="card-title">Register</h4>
                                     </div>
                                     <div class="card-body">
+                                    {message}
                                         <form onSubmit={onSubmit}>
                                             <div class="form-group">
                                                 <label>User Name</label>

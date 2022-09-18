@@ -1,9 +1,17 @@
 import Link from "next/link";
 import React, { useState } from 'react';
 import Layout from '../components/layout/Layout';
+import { useRouter } from 'next/router';
 
 
 function Blank() {
+    const TOKEN_STORAGE_KEY = 'token';
+    const router = useRouter();
+    console.log(router.query.token);
+    if (router.query.token) { 
+          localStorage.setItem(TOKEN_STORAGE_KEY, router.query.token);
+          router.push('/')
+        }
     const [isToggled, setToggled] = useState(false);
     const [openClass, setOpenClass] = useState(false);
 

@@ -13,6 +13,9 @@ a {
 .login-header{
   margin-left:20px;
 }
+.error {
+  color: red;
+}
 
 * {
   box-sizing: border-box;

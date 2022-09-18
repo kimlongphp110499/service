@@ -1,14 +1,11 @@
 
 import axios from 'axios';
 import Route from 'next/router';
-import { ToastProvider, useToasts } from 'react-toast-notifications';
-import toast, { Toaster } from 'react-hot-toast';
 
 export const TOKEN_STORAGE_KEY = 'token';
 export const USER_STORAGE_KEY = 'userName';
 export const USER_ROLE_KEY = 'userRole';
-const BASE_URL = 'http://localhost/api';
-const notify = () => toast('Here is your toast.');
+const BASE_URL = 'http://127.0.0.1:8000';
 
 
 class AuthService {
@@ -22,20 +19,19 @@ class AuthService {
 
   static handleLogin = async (email, password) => {
     try {
-      const result = await axios.post(BASE_URL+'/login', {
+      const result = await axios.post(BASE_URL+'/token', {
         email,
         password,
       });
-     
-      if (result.status === 200) {
+      if (result.data.token != null) {
         localStorage.setItem(TOKEN_STORAGE_KEY, result.data.token);
-        Route.push('/register');
+        Route.push('/');
+      }
+     else {
+        return false;
       }
     } catch (e) {
      
-      toast('Here is your toast.');
-      //addToast('Saved Successfully', { appearance: 'success' });
-      //Route.push('/register');
       if (e.response && e.response.status === 422) return e.response;
       console.error('Cannot login', e.message);
       return false;
@@ -43,16 +39,13 @@ class AuthService {
   };
   static handleRegister = async (name, email, password) => {
     try {
-      const result = await axios.post(BASE_URL+'/login', {
+      const result = await axios.post(BASE_URL+'/register', {
         name,
         email,
         password,
-      });
-      toast("Wow so easy!");
-      Route.push('/login');
+      });    
       if (result.status === 200) {
-        toast.notify(`Hi, I am a toast!`)
-        Route.push('/login');
+        return true;
       }
     } catch (e) {
       if (e.response && e.response.status === 422) return e.response;
