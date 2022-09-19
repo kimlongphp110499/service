@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Route from 'next/router';
-
+import AuthService from '../service/auth.service';
 
 const useClickOutside = (handler) => {
     let domNode = useRef();

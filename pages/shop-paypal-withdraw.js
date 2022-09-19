@@ -52,15 +52,33 @@ function Blank() {
                             <div class="card-body">
                                 <form>
                                     <div class="form-group">
-                                        <label>Choose Amount</label>
+                                        <label>Choose Package License</label>
                                         <ul class="choose_amount">
-                                            <li class="wave-effect active">$2.50</li>
-                                            <li class="wave-effect">$2.50</li>
-                                            <li class="wave-effect">$2.50</li>
-                                            <li class="wave-effect">$2.50</li>
-                                            <li class="wave-effect">$2.50</li>
-                                            <li class="wave-effect">$2.50</li>
-                                            <li class="wave-effect">$2.50</li>
+                                            <li class="wave-effect active">Personals</li>
+                                            <li class="wave-effect">Business & Team</li>
+                                            <li class="wave-effect">Developer DDL</li>
+                                        </ul>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Choose Max Device</label>
+                                        <ul class="choose_amount">
+                                            <li class="wave-effect ">1 Device</li>
+                                            <li class="wave-effect active">5 Device</li>
+                                            <li class="wave-effect ">10 Device</li>
+                                            <li class="wave-effect ">15 Device</li>
+                                            <li class="wave-effect ">30 Device</li>
+                                            <li class="wave-effect ">50 Device</li>
+                                        </ul>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Exp Time License</label>
+                                        <ul class="choose_amount">
+                                            <li class="wave-effect ">3 Days</li>
+                                            <li class="wave-effect ">7 Days</li>
+                                            <li class="wave-effect ">30 Days</li>
+                                            <li class="wave-effect active">180 Days</li>
+                                            <li class="wave-effect ">365 Days</li>
+                                            <li class="wave-effect ">2000 Days</li>
                                         </ul>
                                     </div>
                                     <div class="form-group">

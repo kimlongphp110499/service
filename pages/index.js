@@ -1,13 +1,15 @@
 import Link from "next/link";
-import React, { useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 import Layout from '../components/layout/Layout';
 import { useRouter } from 'next/router';
-
+import AuthService from '../service/auth.service';
 
 function Blank() {
     const TOKEN_STORAGE_KEY = 'token';
     const router = useRouter();
-    console.log(router.query.token);
+    const [main, setMain] = useState(
+        ''
+    )
     if (router.query.token) { 
           localStorage.setItem(TOKEN_STORAGE_KEY, router.query.token);
           router.push('/')
@@ -22,9 +24,15 @@ function Blank() {
 
 
     const toggleTrueFalse = () => setToggled(!isToggled);
+    useEffect(async () => {
+        if(localStorage.getItem('token') !== null){
+            const resp = await AuthService.getUserProfile();
+            setMain(resp.name)
+        }
+    });
     return (
         <>
-            <Layout subTitle="Welcome Back!" pageTitle="Thomas Henry">
+            <Layout subTitle="Welcome Today!" pageTitle={main}>
 
                 <div class="earn_possibilities">
                     <div class="container">
@@ -32,8 +40,8 @@ function Blank() {
                             <div class="col-xl-12">
                                 <div class="earn_possibilities-header">
                                     <div class="title">
-                                        <span><img src="./images/svg/bar_chart.svg" alt="" /></span>
-                                        <p>Earn Possibilities</p>
+                                        <img style={{width: "100px",fontWeight: "bold"}} src="./images/svg/service.svg" alt="" />
+                                        <p>Software & Services</p>
                                     </div>
                                     <span class="see_all" onClick={toggleTrueFalse}>{isToggled ? "Hide All" : "See All"} </span>
                                 </div>

@@ -16,6 +16,28 @@ class AuthService {
       Authorization: 'Bearer ' + token,
     };
   };
+  static getUserProfile = async () => {
+    
+    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+    let config = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    try {
+      const result = await axios.get( 
+        BASE_URL+'/profile',
+        config
+      );
+      if (result.status === 200) {
+        return result.data.result;
+      }
+    } catch (e) {
+      if (e.response && e.response.status === 422) return e.response;
+      console.error('Cannot login', e.message);
+      return false;
+    }
+  };
 
   static handleLogin = async (email, password) => {
     try {

@@ -1,8 +1,21 @@
-import React from 'react'
+import { useEffect, useRef, useState } from "react";
 import ChartData from '../components/chart/chart'
 import Layout from '../components/layout/Layout'
+import { useRouter } from 'next/router';
+import AuthService from '../service/auth.service';
 
 function Blank() {
+    const [profile, setProfile] = useState(
+        []
+     )
+     const resp = []
+     useEffect(async () => {
+         if(localStorage.getItem('token') !== null){
+              resp = await AuthService.getUserProfile();
+             setProfile(resp)
+             
+         }
+     });
     return (
         <>
             <Layout subTitle="Back to Home" pageTitle="Profile">
@@ -15,13 +28,13 @@ function Blank() {
                                     <div class="d-flex">
                                         <img src="./images/profile/profile.png" alt="" />
                                         <div class="flex-grow-1">
-                                            <h4>Henry John Paulin</h4>
-                                            <p>henry@gmail.com</p>
+                                            <h4>{profile.name}</h4>
+                                            <p>{profile.email}</p>
                                         </div>
                                     </div>
                                     <div class="profile-reg">
                                         <div class="registered">
-                                            <h5>25 June 2021</h5>
+                                            <h5>{profile.created_at}</h5>
                                             <p>Registered</p>
                                         </div>
                                         <span class="reg_divider"></span>

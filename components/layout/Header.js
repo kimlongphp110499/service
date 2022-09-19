@@ -1,7 +1,7 @@
-import React from 'react'
 import Link from "next/link"
-import { useState } from 'react'
 import useClickOutside from '../../util/outsideClick';
+import AuthService from '../../service/auth.service';
+import { useEffect, useState } from "react";
 
 function Header() {
     const [openClass, setOpenClass] = useState(false);
@@ -16,11 +16,18 @@ function Header() {
     var loginButton;
     const token = ''
     const ISSERVER = typeof window === "undefined";
-
+    const [profile, setProfile] = useState(
+       []
+    )
     if (!ISSERVER) {
     token = localStorage.getItem("token");
     }
-    //const token = localStorage.getItem('token');
+    useEffect(async () => {
+        if(localStorage.getItem('token') !== null){
+            const resp = await AuthService.getUserProfile();
+            setProfile(resp)
+        }
+    });
     
     if (token) {
         loginButton = 
@@ -38,23 +45,27 @@ function Header() {
             </div><div class="profile_log dropdown" ref={domNode}>
                     <div class="user" onClick={handleOpen}>
                         <span class="thumb"><i class="la la-user"></i></span>
-                        <span class="name">Thomas Christ</span>
+                        <span class="name">{profile.name}</span>
                         <span class="arrow"><i class="la la-angle-down"></i></span>
                     </div>
                     <div class={openClass ? "dropdown-menu show dropdown-menu-end" : "dropdown-menu dropdown-menu-end"} style={{ "right": "0", "left": "auto" }}>
                         <Link href="/profile"><a class="dropdown-item">
                             <i class="la la-user"></i>
-                            Profile
+                            Profile Analytics
                         </a></Link>
                         <Link href="/history"><a class="dropdown-item">
                             <i class="la la-book"></i>
-                            History
+                            Order History
+                        </a></Link>
+                        <Link href="/history"><a class="dropdown-item">
+                            <i class="la la-book"></i>
+                            Payment History
                         </a></Link>
                         <Link href="/settings"><a class="dropdown-item">
                             <i class="la la-cog"></i>
                             Settings
                         </a></Link>
-                        <Link href="/"><a class="dropdown-item logout">
+                        <Link href="/logout"><a class="dropdown-item logout">
                             <i class="la la-sign-out"></i>
                             Logout
                         </a></Link>
@@ -86,7 +97,7 @@ function Header() {
                                 <div class={show ? "collapse navbar-collapse show" : "collapse navbar-collapse"} id="navbarSupportedContent">
                                     <ul class="navbar-nav menu">
                                         <li class="nav-item">
-                                            <Link href="/shop"><a class="nav-link">Shop</a></Link>
+                                            <Link href="/shop"><a class="nav-link">Software & Services</a></Link>
                                         </li>
                                         <li class="nav-item">
                                             <Link href="/affiliate"><a class="nav-link">Affiliates</a></Link>

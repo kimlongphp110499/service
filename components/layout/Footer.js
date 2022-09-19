@@ -11,7 +11,7 @@ function Footer() {
                             <div class="footer-link text-left">
                                 <Link href="#"><a class="m_logo">
                                     <img src="./images/m_logo.png" alt="" /></a></Link>
-                                <Link href="/shop"><a>Shop</a></Link>
+                                <Link href="/shop"><a>Software & Services</a></Link>
                                 <Link href="/affiliate"><a>Affiliates</a></Link>
                                 <Link href="/affiliate"><a>Leaderboards</a></Link>
                                 <Link href="/support"><a>Support</a></Link>
