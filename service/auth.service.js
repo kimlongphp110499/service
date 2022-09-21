@@ -61,7 +61,7 @@ class AuthService {
   };
   static handleRegister = async (name, email, password) => {
     try {
-      const result = await axios.post(BASE_URL+'/register', {
+      const result = await axios.post(BASE_URL+'/register-device', {
         name,
         email,
         password,
