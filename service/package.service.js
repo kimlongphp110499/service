@@ -31,9 +31,9 @@ class PackageService {
       const result = await axios.get( 
         BASE_URL+'/api/detail-shop/'+id,
       );
-      if (result.status === 200) {
+     
         return result.data.result;
-      }
+      
     } catch (e) {
       if (e.response && e.response.status === 422) return e.response;
       console.error('Cannot get detail package', e.message);
