@@ -26,11 +26,11 @@ class AuthService {
     }
     try {
       const result = await axios.get( 
-        BASE_URL+'/profile',
+        BASE_URL+'/me',
         config
       );
       if (result.status === 200) {
-        return result.data.result;
+        return result.data;
       }
     } catch (e) {
       if (e.response && e.response.status === 422) return e.response;

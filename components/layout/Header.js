@@ -19,13 +19,19 @@ function Header() {
     const [profile, setProfile] = useState(
        []
     )
+    const [wallet, setWallet] = useState(
+        []
+     )
     if (!ISSERVER) {
     token = localStorage.getItem("token");
     }
     useEffect(async () => {
         if(localStorage.getItem('token') !== null){
             const resp = await AuthService.getUserProfile();
-            setProfile(resp)
+            if(profile.length == 0){
+                setProfile(resp)
+                setWallet(resp.wallet)
+            }
         }
     });
     
@@ -35,7 +41,7 @@ function Header() {
             <><div class="account_money">
                 <ul>
                     <li class="crypto">
-                        <span>2500</span>
+                        <span>{wallet.available_points}</span>
                         <img src="./images/icon/gem.svg" alt="" />
                     </li>
                     <li class="usd">

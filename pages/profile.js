@@ -8,12 +8,17 @@ function Blank() {
     const [profile, setProfile] = useState(
         []
      )
+     const [wallet, setWallet] = useState(
+        []
+     )
      const resp = []
      useEffect(async () => {
          if(localStorage.getItem('token') !== null){
               resp = await AuthService.getUserProfile();
-             setProfile(resp)
-             
+              if(profile.length == 0){
+                setProfile(resp)
+                setWallet(resp.wallet)
+            }             
          }
      });
     return (
@@ -98,7 +103,7 @@ function Blank() {
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="chart_current_data">
-                                                        <h3>406</h3>
+                                                        <h3>{wallet.available_points}</h3>
                                                         <p>Coin Earned</p>
                                                     </div>
                                                     {/* <canvas id="coin_earned"></canvas> */}
