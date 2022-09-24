@@ -38,7 +38,8 @@ function Header() {
     if (token) {
         loginButton = 
       
-            <><div class="account_money">
+            <div class="d-flex align-items-center">
+                <div class="account_money">
                 <ul>
                     <li class="crypto">
                         <span>{wallet.available_points}</span>
@@ -76,16 +77,18 @@ function Header() {
                             Logout
                         </a></Link>
                     </div>
-                </div></>
+                </div></div>
 
     } else {
     loginButton = 
    
-        <><div class="login-header" ref={domNode}>
-            <Link href="/login"><a class="nav-link btn btn-primary">Login</a></Link>
-        </div><div class="login-header" ref={domNode}>
+    
+        <div class="d-flex align-items-center">
+            <Link href="/login"><a class="nav-link btn btn-primary" style={{"margin-right":"25px"}}>Login</a></Link>
+       
                 <Link href="/register"><a class="nav-link btn btn-primary">Register</a></Link>
-            </div></>
+                
+                </div>
        
     }
     return (
@@ -117,9 +120,9 @@ function Header() {
                                     </ul>
                                 </div>
                                     <div class="dashboard_log my-2">
-                                    <div class="d-flex align-items-center">
+                                    
                                 {loginButton}
-                                </div>
+                               
                                 </div>
                             </nav>
                         </div>
