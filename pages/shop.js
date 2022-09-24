@@ -38,7 +38,7 @@ function Blank() {
             <div class="col-xl-3">
                         <div class="gift_card-content">
                             <div class="icon paypal">
-                                <span><img  alt=""/></span>
+                                <span><img src={data.image} alt=""/></span>
                             </div>
                             <h4>{data.name}</h4>
                             <p>{data.desc}</p>
