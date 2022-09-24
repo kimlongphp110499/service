@@ -46,7 +46,7 @@ function Header() {
                         <img src="./images/icon/gem.svg" alt="" />
                     </li>
                     <li class="usd">
-                        <span>4000 USD</span>
+                        <span>4000 VND</span>
                     </li>
                 </ul>
             </div><div class="profile_log dropdown" ref={domNode}>
