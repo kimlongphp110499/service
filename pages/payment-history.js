@@ -35,17 +35,17 @@ function Blank() {
               )
               const datapush = []
               const totalPagePush = []
-              for (let obj of res.data.result.data) {
+              for (let obj of res.data.payments.data) {
                 datapush.push(obj)
             }
-            if(datas.length == 0 && res.data.result.data.length){
+            if(datas.length == 0 && res.data.payments.data.length){
                 setDatas(datapush)
-                for (const i = 1; i<= res.data.result.last_page; i++) {
+                for (const i = 1; i<= res.data.payments.last_page; i++) {
                     totalPagePush.push(i)
                 }
                 setTotalPage(totalPagePush)
             }
-            console.log(totalPage);
+            console.log( res.data.payments.data.length);
             return datas
         } catch (err) {
             console.log(err);
@@ -53,7 +53,7 @@ function Blank() {
     });
     return (
         <>
-            <Layout subTitle="Back to Home" pageTitle="Order History">
+            <Layout subTitle="Back to Home" pageTitle="Payment History">
                 <div class="history">
                     <div class="container">
                         <div class="row">
@@ -89,12 +89,12 @@ function Blank() {
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th style={{"width": "200px"}}>Order ID</th>
-                                                    <th style={{"width": "200px"}}>Package ID</th>
-                                                    <th style={{"width": "200px"}}>Max Device</th>
+                                                    <th style={{"width": "200px"}}>Payment ID</th>
+                                                    <th style={{"width": "200px"}}>Method</th>
+                                                    <th style={{"width": "200px"}}>Node</th>
+                                                    <th style={{"width": "200px"}}>Bank Name</th>
                                                     <th style={{"width": "200px"}}>Total</th>
-                                                    <th style={{"width": "200px"}}>Exp Time</th>
-                                                    <th style={{"width": "200px"}}>Date</th>
+                                                    <th style={{"width": "250px"}}>Date</th>
                                                     <th style={{"width": "200px"}}>Status</th>
                                                 </tr>
                                             </thead>
@@ -102,13 +102,14 @@ function Blank() {
                                             {datas.map((data, key) => {
                                                 return (
                                                     <tr>
-                                                    <td style={{"width": "200px"}}>HD{data.id}</td>
-                                                    <td style={{"width": "200px"}}><Link href={{ pathname: '/shop-detail', query: { id: data.package_id } }}><a class="paypal-btn wave-effect">{data.package_id}</a></Link></td>
-                                                    <td style={{"width": "200px"}}>{data.max_device} Device</td>
-                                                    <td style={{"width": "200px"}}>{new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(data.price)}</td>
-                                                    <td style={{"width": "200px"}}>{data.exp_day_time} Days <span><img alt="" /></span></td>
-                                                    <td style={{"width": "200px"}}>{data.created_at}</td>
-                                                    <td style={{"width": "200px"}}>{data.status == 1 ? 'Paid' : 'Unpaid'}</td>
+                                                    <td style={{"width": "200px"}}>{data.id}</td>
+                                                    <td style={{"width": "200px"}}>VNPAY</td>
+                                                    <td style={{"width": "200px"}}>{data.p_node}</td>
+                                                    <td style={{"width": "200px"}}>{data.p_code_bank}</td>
+                                                    <td style={{"width": "200px"}}>{data.p_money}</td>
+                                                    <td style={{"width": "250px"}}>{data.p_time}</td>
+                                                    <td style={{"width": "200px"}}>{data.p_vnp_response_code == '00' ? 'Paid' : 'Unpaid'}</td> 
+                                                  
                                                 </tr>
                                                 );
                                                 })}
@@ -128,7 +129,7 @@ function Blank() {
                                                     // <li class="page-item disabled">
                                                     //     <Link href={{ pathname: '/order-history', query: { page: data } }}><a class="paypal-btn wave-effect">{data}</a></Link>
                                                     // </li>
-                                                    <li class="page-item "><a class={data == router.query.page ? 'page-link active': 'page-link'} href={'/order-history?page='+data}>{data}</a></li>
+                                                    <li class="page-item "><a class={data == router.query.page ? 'page-link active': 'page-link'} href={'/payment-history?page='+data}>{data}</a></li>
                                                 );
                                                 })}
                                     </ul>

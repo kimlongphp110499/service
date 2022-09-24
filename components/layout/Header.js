@@ -64,7 +64,7 @@ function Header() {
                             <i class="la la-book"></i>
                             Order History
                         </a></Link>
-                        <Link href="/history"><a class="dropdown-item">
+                        <Link href="/payment-history"><a class="dropdown-item">
                             <i class="la la-book"></i>
                             Payment History
                         </a></Link>
