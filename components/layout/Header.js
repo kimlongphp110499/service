@@ -60,7 +60,7 @@ function Header() {
                             <i class="la la-user"></i>
                             Profile Analytics
                         </a></Link>
-                        <Link href="/history"><a class="dropdown-item">
+                        <Link href="/order-history"><a class="dropdown-item">
                             <i class="la la-book"></i>
                             Order History
                         </a></Link>
