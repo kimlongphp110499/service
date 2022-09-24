@@ -11,7 +11,7 @@ function Welcome() {
               try {
                 const data = await PackageService.getDetail(router.query.id);
                 resp = (JSON.stringify(data))
-                if(names.length == 0){
+                  if(names.length == 0 ){
                     setNames(JSON.parse(resp))
                   }
                 
@@ -19,12 +19,9 @@ function Welcome() {
                 console.log(err);
             }
      });
-     if(names.length > 0){
-      
-     }
        return (
         <>
-            <Layout subTitle="Back to Shop" pageTitle={names.name}>
+            <Layout subTitle="Back to Shop" pageTitle={names?.name}>
 
     <div class="shop_withdraw">
         <div class="container">
@@ -34,13 +31,13 @@ function Welcome() {
                         <div class="card">
                             <div class="card-header">
                                 <div class="icon paypal">
-                                    <span><img src={names.image} style={{"width":"100%"}} alt=""/></span>
+                                    <span><img src={names?.image} style={{"width":"100%"}} alt=""/></span>
                                 </div>
-                                <h4 class="card-title">{names.name}</h4>
+                                <h4 class="card-title">{names?.name}</h4>
                             </div>
                             <div class="card-body">
                                 <h5>Description :</h5>
-                                <p>{names.desc}
+                                <p>{names?.desc}
                                 </p>
                             </div>
                             <div class="card-footer">
@@ -64,21 +61,21 @@ function Welcome() {
                     <div class="shop_card_content">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">{names.name}</h4>
+                                <h4 class="card-title">{names?.name}</h4>
                             </div>
                             <div class="card-body">
                                 <form>
                                     <div class="form-group">
                                         <label>Choose Package License</label>
                                         <ul class="choose_amount">
-                                        {names.key?.map((data, key) => {
+                                        {names?.key?.map((data, key) => {
                                           return (  <li class="wave-effect">{data}</li>)})}   
                                         </ul>
                                     </div>
                                     <div class="form-group">
                                         <label>Choose Max Device</label>
                                         <ul class="choose_amount">
-                                        {names.max_device?.map((data, key) => {
+                                        {names?.max_device?.map((data, key) => {
                                           return (  <li class="wave-effect">{data} Device</li>)})} 
                                             
                                         </ul>
@@ -86,7 +83,7 @@ function Welcome() {
                                     <div class="form-group">
                                         <label>Exp Time License</label>
                                         <ul class="choose_amount">
-                                        {names.exp_day_time?.map((data, key) => {
+                                        {names?.exp_day_time?.map((data, key) => {
                                           return (  <li class="wave-effect">{data} Days</li>)})} 
                                         </ul>
                                     </div>
