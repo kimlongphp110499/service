@@ -1,7 +1,6 @@
 import React from 'react'
 import Layout from '../components/layout/Layout'
 import { useEffect, useRef, useState } from "react";
-import LeaderBoardService from '../service/leaderboard.service';
 import axios from 'axios';
 
 function Blank() {
