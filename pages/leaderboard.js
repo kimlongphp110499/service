@@ -2,37 +2,51 @@ import React from 'react'
 import Layout from '../components/layout/Layout'
 import { useEffect, useRef, useState } from "react";
 import axios from 'axios';
+import Link from "next/link"
+import { useRouter } from 'next/router';
 
 function Blank() {
+    const router = useRouter();
     const [top1, setTop1] = useState([])
     const [top3, setTop3] = useState([])
     const [top2, setTop2] = useState([])
     const [top10, setTop10] = useState([])
     const BASE_URL = 'http://127.0.0.1:8000';
 
-    useEffect(async () => {
+    async function renderData (){
         try {
+            const param = ''
+            if(router.query.value)
+            {
+                param = router.query.value+'=true'
+            }
             const res = await axios.get( 
-                BASE_URL+'/api/list-leader-board')
-                if(top1.length == 0){
+                BASE_URL+'/api/list-leader-board?'+param)
+                if(top1.length == 0 && res.data.top1 !== null ){
                     setTop1(res.data.top1)
                 }
-                if(top2.length == 0){
+                if(top2.length == 0  && res.data.top2 !== null){
                     setTop2(res.data.top2)
                 }
-                if(top3.length == 0){
+                if(top3.length == 0  && res.data.top3 !== null){
                     setTop3(res.data.top3)
+                    if(res.data.top10.length > 0 && top10.length == 0){
+                            setTop10(res.data.top10)
+                                       
+                      }
+                      else{
+                        setTop10([])
+                      }
                 }
-              const datapush = []
-              for (let obj of res.data.top10) {
-                datapush.push(obj)
-            }
-            if(top10.length == 0){
-                setTop10(datapush)
-            }
+             
+              
         } catch (err) {
             console.log(err);
         }
+    }
+
+    useEffect(async () => {
+        renderData()
     });
     return (
         <>
@@ -43,13 +57,15 @@ function Blank() {
                    <div class="leaderboard_tab_link">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#alltime">All Time</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="/leaderboard">All Time</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#week">Week</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="/leaderboard?value=week">Week</a>
+                            {/* <Link href={{ pathname: '/leaderboard', query: { value: 'week' } }}><a class="nav-link" data-bs-toggle="tab">Week</a></Link> */}
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#month">Month</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="/leaderboard?value=month">Week</a>
+                            {/* <Link href={{ pathname: '/leaderboard', query: { value: 'month' } }}><a class="nav-link" data-bs-toggle="tab">Month</a></Link> */}
                             </li>
                         </ul>
                     </div>
