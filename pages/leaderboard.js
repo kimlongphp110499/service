@@ -14,24 +14,21 @@ function Blank() {
         try {
             const res = await axios.get( 
                 BASE_URL+'/api/list-leader-board')
+                if(top1.length == 0){
+                    setTop1(res.data.top1)
+                }
+                if(top2.length == 0){
+                    setTop2(res.data.top2)
+                }
+                if(top3.length == 0){
+                    setTop3(res.data.top3)
+                }
               const datapush = []
               for (let obj of res.data.top10) {
                 datapush.push(obj)
             }
             if(top10.length == 0){
-                setTop1(res.data.top1)
-            }
-            if(top1.length == 0){
-                setTop1(res.data.top1)
-            }
-            if(top2.length == 0){
-                setTop2(res.data.top2)
-            }
-            if(top3.length == 0){
-                setTop3(res.data.top3)
-            }
-            if(top10.length == 0){
-                setTop10(res.data.top10)
+                setTop10(datapush)
             }
         } catch (err) {
             console.log(err);
@@ -65,6 +62,7 @@ function Blank() {
                             <img src="./images/svg/ani-18.png" alt=""/>
                         </div>
                         <div class="top_rank">
+                        {top1 !== null && (
                             <div class="d-flex crown rank_ani1">
                                 <div class="rank_icon">
                                     <img src="./images/svg/crown.svg" alt=""/>
@@ -83,6 +81,8 @@ function Blank() {
                                     </div>
                                 </div>
                             </div>
+                        )}
+                            {top2 !== null && (
                             <div class="d-flex cup rank_ani2">
                                 <div class="rank_icon">
                                     <img src="./images/svg/cup.svg" alt=""/>
@@ -101,24 +101,28 @@ function Blank() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex medal rank_ani1">
-                                <div class="rank_icon">
-                                    <img src="./images/svg/medal.svg" alt=""/>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <span class="circle"></span>
-                                    <h6>Third 3</h6>
-                                    <h5>Peter Jay Smith Was</h5>
-                                    <p>19.280G</p>
-                                </div>
-                                <div class="prize">
-                                    <h4> 9.800</h4>
-                                    <div class="prize_gem">
-                                        <span>Prize</span>
-                                        <img src="./images/svg/gem.svg" alt=""/>
-                                    </div>
-                                </div>
-                            </div>
+                            )}
+                            {top3 !== null && (
+                                  <div class="d-flex medal rank_ani1">
+                                  <div class="rank_icon">
+                                      <img src="./images/svg/medal.svg" alt=""/>
+                                  </div>
+                                  <div class="flex-grow-1">
+                                      <span class="circle"></span>
+                                      <h6>Third 3</h6>
+                                      <h5>Peter Jay Smith Was</h5>
+                                      <p>19.280G</p>
+                                  </div>
+                                  <div class="prize">
+                                      <h4> 9.800</h4>
+                                      <div class="prize_gem">
+                                          <span>Prize</span>
+                                          <img src="./images/svg/gem.svg" alt=""/>
+                                      </div>
+                                  </div>
+                              </div>
+                            )}
+                          
                         </div>
                     </div>
 
@@ -132,6 +136,7 @@ function Blank() {
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="alltime">
                                     <div class="table-responsive">
+                                    {top10.length > 0 && (
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -142,7 +147,7 @@ function Blank() {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {top10.map((data, key) => {
+                                            {(top10.map((data, key) => {
                                                 return (
                                                     <tr>
                                                     <th scope="row">{key+4}</th>
@@ -152,8 +157,7 @@ function Blank() {
                                                     <td>{data.total} <img src="./images/svg/gem.svg" alt=""/></td>
                                                 </tr>
                                                 );
-                                                })}
-                                               
+                                                }))}                                               
                                                 {/* <tr>
                                                     <th scope="row">05</th>
                                                     <td class="user_circle"> <span class="circle user2"></span> John
@@ -197,6 +201,7 @@ function Blank() {
                                                 </tr> */}
                                             </tbody>
                                         </table>
+                                        )}
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="week">
