@@ -8,7 +8,7 @@ import Welcome from "./shop-detail";
 
 function Blank() {
     const [datas, setDatas] = useState([])
-    const BASE_URL = process.env.REACT_APP_API_ENDPOINT;
+    const BASE_URL = process.env.API_ENDPOINT;
     useEffect(async () => {
         try {
             const res = await axios.get( 
