@@ -11,7 +11,8 @@ function Blank() {
     const [top3, setTop3] = useState([])
     const [top2, setTop2] = useState([])
     const [top10, setTop10] = useState([])
-    const BASE_URL = 'http://127.0.0.1:8000';
+    const BASE_URL = process.env.API_ENDPOINT;
+
 
     async function renderData (){
         try {
@@ -31,12 +32,13 @@ function Blank() {
                 if(top3.length == 0  && res.data.top3 !== null){
                     setTop3(res.data.top3)
                     if(res.data.top10.length > 0 && top10.length == 0){
-                            setTop10(res.data.top10)
-                                       
-                      }
-                      else{
-                        setTop10([])
-                      }
+                        setTop10(res.data.top10)
+                                   
+                  }
+                  else{
+                    setTop10([])
+                  }
+                    
                 }
              
               
@@ -45,9 +47,12 @@ function Blank() {
         }
     }
 
-    useEffect(async () => {
-        renderData()
-    });
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            renderData ()
+        }, 2000);
+        return () => clearTimeout(timer);
+      }, []);
     return (
         <>
             <Layout subTitle="Leaderboard" pageTitle="CoinGain Top Ranking">
@@ -57,15 +62,13 @@ function Blank() {
                    <div class="leaderboard_tab_link">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="/leaderboard">All Time</a>
+                            <a class={!router.query.value ? 'nav-link active': 'nav-link'} data-bs-toggle="tab" href="/leaderboard">All Time</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="/leaderboard?value=week">Week</a>
-                            {/* <Link href={{ pathname: '/leaderboard', query: { value: 'week' } }}><a class="nav-link" data-bs-toggle="tab">Week</a></Link> */}
+                            <a class={router.query.value == 'week' ? 'nav-link active': 'nav-link'} data-bs-toggle="tab" href="/leaderboard?value=week">Week</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="/leaderboard?value=month">Week</a>
-                            {/* <Link href={{ pathname: '/leaderboard', query: { value: 'month' } }}><a class="nav-link" data-bs-toggle="tab">Month</a></Link> */}
+                            <a class={router.query.value == 'month' ? 'nav-link active': 'nav-link'} data-bs-toggle="tab" href="/leaderboard?value=month">Month</a>
                             </li>
                         </ul>
                     </div>

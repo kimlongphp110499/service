@@ -5,7 +5,7 @@ import Route from 'next/router';
 export const TOKEN_STORAGE_KEY = 'token';
 export const USER_STORAGE_KEY = 'userName';
 export const USER_ROLE_KEY = 'userRole';
-const BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = process.env.API_ENDPOINT;
 
 
 class PackageService {

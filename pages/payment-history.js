@@ -13,7 +13,7 @@ function Blank() {
     if (!ISSERVER) {
         token = localStorage.getItem("token");
         }
-    const BASE_URL = 'http://127.0.0.1:8000';
+    const BASE_URL = process.env.API_ENDPOINT;
     let config = {
         headers: {
           'Authorization': 'Bearer ' + token
