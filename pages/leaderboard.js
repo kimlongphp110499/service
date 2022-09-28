@@ -5,24 +5,96 @@ import axios from 'axios';
 import Link from "next/link"
 import { useRouter } from 'next/router';
 
+function handleOpen(){
+    console.log(12);
+}
 function Blank() {
     const router = useRouter();
     const [top1, setTop1] = useState([])
     const [top3, setTop3] = useState([])
     const [top2, setTop2] = useState([])
     const [top10, setTop10] = useState([])
+    const [activeweek, setActiveweek] = useState(false)
+    const [activemonth, setActivemonth] = useState(false)
     const BASE_URL = process.env.API_ENDPOINT;
 
-
+    async function renderDataWeek (){
+        try {
+            setActiveweek(true)
+            setActivemonth(false)
+            setTop1([])
+            setTop2([])
+            setTop3([])
+            setTop10([])
+            const res = await axios.get( 
+                BASE_URL+'/api/list-leader-board?week=true')
+                if(res.data.top1 !== null ){
+                    setTop1(res.data.top1)
+                }
+                if( res.data.top2 !== null){
+                    setTop2(res.data.top2)
+                }
+                if(res.data.top3 !== null){
+                    setTop3(res.data.top3)
+                    
+                }
+                if(res.data.top10 !== null){
+                    setTop10(res.data.top10)             
+                }
+                else{
+                    
+                    setTop10([])
+                }
+                console.log(top1)
+                console.log(top2)
+                console.log(Object.keys(top3).length)
+                console.log(top10);
+              
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    async function renderDataMonth (){
+        try {
+            setActivemonth(true)
+            setActiveweek(false)
+            setTop1([])
+            setTop2([])
+            setTop3([])
+            setTop10([])
+            const res = await axios.get( 
+                BASE_URL+'/api/list-leader-board?month=true')
+                if(res.data.top1 !== null ){
+                    setTop1(res.data.top1)
+                }
+                if( res.data.top2 !== null){
+                    setTop2(res.data.top2)
+                }
+                if(res.data.top3 !== null){
+                    setTop3(res.data.top3)
+                    
+                }
+                if(res.data.top10 !== null){
+                    setTop10(res.data.top10)             
+                }
+                else{
+                    console.log('ngu')
+                    setTop10([])
+                }
+                console.log(top1)
+                console.log(top2)
+                console.log(top3)
+                console.log(Object.keys(top3).length)
+              
+        } catch (err) {
+            console.log(err);
+        }
+    }
     async function renderData (){
         try {
-            const param = ''
-            if(router.query.value)
-            {
-                param = router.query.value+'=true'
-            }
+
             const res = await axios.get( 
-                BASE_URL+'/api/list-leader-board?'+param)
+                BASE_URL+'/api/list-leader-board')
                 if(top1.length == 0 && res.data.top1 !== null ){
                     setTop1(res.data.top1)
                 }
@@ -40,6 +112,9 @@ function Blank() {
                   }
                     
                 }
+                console.log(top1)
+                console.log(top2)
+                console.log(Object.keys(top3).length)
              
               
         } catch (err) {
@@ -62,13 +137,13 @@ function Blank() {
                    <div class="leaderboard_tab_link">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                            <a class={!router.query.value ? 'nav-link active': 'nav-link'} data-bs-toggle="tab" href="/leaderboard">All Time</a>
+                            <a class={activeweek == false && activemonth == false ? 'nav-link active': 'nav-link'} data-bs-toggle="tab"  href="/leaderboard">All Time</a>
                             </li>
                             <li class="nav-item">
-                            <a class={router.query.value == 'week' ? 'nav-link active': 'nav-link'} data-bs-toggle="tab" href="/leaderboard?value=week">Week</a>
+                            <a onClick={renderDataWeek} class={activeweek == true ? 'nav-link active': 'nav-link'} data-bs-toggle="tab">Week</a>
                             </li>
                             <li class="nav-item">
-                            <a class={router.query.value == 'month' ? 'nav-link active': 'nav-link'} data-bs-toggle="tab" href="/leaderboard?value=month">Month</a>
+                            <a onClick={renderDataMonth} class={activemonth == true ? 'nav-link active': 'nav-link'} data-bs-toggle="tab">Month</a>
                             </li>
                         </ul>
                     </div>
@@ -81,7 +156,7 @@ function Blank() {
                             <img src="./images/svg/ani-18.png" alt=""/>
                         </div>
                         <div class="top_rank">
-                        {top1 !== null && (
+                        {Object.keys(top1).length > 0 && (
                             <div class="d-flex crown rank_ani1">
                                 <div class="rank_icon">
                                     <img src="./images/svg/crown.svg" alt=""/>
@@ -101,7 +176,7 @@ function Blank() {
                                 </div>
                             </div>
                         )}
-                            {top2 !== null && (
+                            {Object.keys(top2).length > 0 && (
                             <div class="d-flex cup rank_ani2">
                                 <div class="rank_icon">
                                     <img src="./images/svg/cup.svg" alt=""/>
@@ -121,7 +196,7 @@ function Blank() {
                                 </div>
                             </div>
                             )}
-                            {top3 !== null && (
+                            {Object.keys(top3).length > 0 && (
                                   <div class="d-flex medal rank_ani1">
                                   <div class="rank_icon">
                                       <img src="./images/svg/medal.svg" alt=""/>
