@@ -10,9 +10,18 @@ function Blank() {
     const [main, setMain] = useState(
         ''
     )
+   
     if (router.query.token) { 
           localStorage.setItem(TOKEN_STORAGE_KEY, router.query.token);
-          router.push('/')
+          if(router.query.redirect){
+            router.push({
+                pathname: router.query.redirect,
+                query: { message: true },
+              })
+          }
+          else{
+            router.push('/')
+          }
         }
     const [isToggled, setToggled] = useState(false);
     const [openClass, setOpenClass] = useState(false);
