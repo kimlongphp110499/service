@@ -112,6 +112,9 @@ function Header() {
                                             <Link href="/affiliate"><a class="nav-link">Affiliates</a></Link>
                                         </li>
                                         <li class="nav-item">
+                                            <Link href="/wallet"><a class="nav-link">Wallet</a></Link>
+                                        </li>
+                                        <li class="nav-item">
                                             <Link href="/leaderboard"><a class="nav-link">Leaderboards</a></Link>
                                         </li>
                                         <li class="nav-item">

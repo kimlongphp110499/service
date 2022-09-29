@@ -17,7 +17,7 @@ const useClickOutside = (handler) => {
         // return () => {
         //     document.removeEventListener("mousedown", maybeHandler);
         // };
-        const listRouteMiddleware = ['/profile']
+        const listRouteMiddleware = ['/profile','/wallet','/order-history','/payment-history']
         if(listRouteMiddleware.includes(Route.pathname) && localStorage.getItem('token') == null)
         {
             Route.push('login')
