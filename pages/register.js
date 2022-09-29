@@ -34,15 +34,15 @@ function Blank() {
                                         <form onSubmit={onSubmit}>
                                             <div class="form-group">
                                                 <label>User Name</label>
-                                                <input name="name" type="text" class="form-control" placeholder="Henry"/>
+                                                <input name="name" type="text" class="form-control" placeholder="Example Henry" required/>
                                             </div>
                                             <div class="form-group">
                                                 <label>Email Address</label>
-                                                <input name="email" type="email" class="form-control" placeholder="Enter email address"/>
+                                                <input name="email" type="email" class="form-control" placeholder="Enter email address" required/>
                                             </div>
                                             <div class="form-group">
                                                 <label>Password</label>
-                                                <input name="password" type="password" class="form-control" placeholder="Enter email address"/>
+                                                <input name="password" type="password" class="form-control" placeholder="Enter email address" required/>
                                             </div>
 
                                             <button type="submit" class="btn btn-primary">Register</button>
