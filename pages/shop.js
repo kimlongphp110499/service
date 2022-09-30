@@ -4,12 +4,19 @@ import Layout from '../components/layout/Layout'
 import PackageService from '../service/package.service';
 import axios from 'axios';
 import Welcome from "./shop-detail";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
 
 function Blank() {
+    const router = useRouter();
     const [datas, setDatas] = useState([])
     const BASE_URL = process.env.API_ENDPOINT;
     useEffect(async () => {
+        if(router.query.message_checkout)
+        {
+            toast.success("Payment success!")
+        }
         try {
             const res = await axios.get( 
                 BASE_URL+'/api/list-shop',
@@ -25,11 +32,12 @@ function Blank() {
         } catch (err) {
             console.log(err);
         }
-    });
+    }, [router.isReady]);
    
     return (
         <>
             <Layout subTitle="Software & Services" pageTitle="Software License">
+            <ToastContainer/>
         <div class="gift_card">
             <div class="container">
                 <div class="row">
