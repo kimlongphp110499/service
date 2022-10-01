@@ -68,7 +68,7 @@ class PackageService {
         device,
         days
       },config);
-      if (result.data.result == 'done') {
+      if (result.data.result === 'done') {
         return true;
       }
      else {

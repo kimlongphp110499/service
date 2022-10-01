@@ -13,6 +13,7 @@ function Blank() {
     const [datas, setDatas] = useState([])
     const BASE_URL = process.env.API_ENDPOINT;
     useEffect(async () => {
+        const timer = setTimeout(async () => {
         if(router.query.message_checkout)
         {
             toast.success("Payment success!")
@@ -32,6 +33,8 @@ function Blank() {
         } catch (err) {
             console.log(err);
         }
+    }, 1000);
+        return () => clearTimeout(timer);
     }, [router.isReady]);
    
     return (

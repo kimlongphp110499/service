@@ -49,7 +49,7 @@ function Welcome() {
                 toast.error("Checkout Error!")
             }
             else {
-                Route.push('/shop',{query: { message_checkout: true }});
+                router.push({pathname:'/shop',query: { message_checkout: true }});
             }
         }
     }
