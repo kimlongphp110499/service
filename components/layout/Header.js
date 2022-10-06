@@ -45,8 +45,12 @@ function Header() {
                         <span>{wallet.available_points}</span>
                         <img src="./images/icon/gem.svg" alt="" />
                     </li>
-                    <li class="usd">
-                        <span>4000 VND</span>
+                    <li class="usd" style={{"background": "#F4F4FD"}}>
+                        <span>
+                        <Link href="/wallet">
+                            Add Fund
+                         </Link>
+                        </span>
                     </li>
                 </ul>
             </div><div class="profile_log dropdown" ref={domNode}>
@@ -84,9 +88,8 @@ function Header() {
    
     
         <div class="d-flex align-items-center">
-            <Link href="/login"><a class="nav-link btn btn-primary" style={{"margin-right":"25px"}}>Login</a></Link>
        
-                <Link href="/register"><a class="nav-link btn btn-primary">Register</a></Link>
+                <Link href="/login"><a class="btn btn-primary" style={{"marginRight":"-39px","marginTop":"-27%"}}>Login/Register</a></Link>
                 
                 </div>
        
@@ -99,7 +102,7 @@ function Header() {
                         <div class="col-xl-12">
                             <nav class="navbar navbar-expand-lg navbar-light">
                                 <Link href="/"><a class="navbar-brand"><img src="./images/logo.png" alt="" /></a></Link>
-                                <button class="navbar-toggler" type="button" onClick={handleShow}>
+                                <button class="navbar-toggler" style={{"margin-top": "-23%"}} type="button" onClick={handleShow}>
                                     <span class="navbar-toggler-icon"></span>
                                 </button>
 

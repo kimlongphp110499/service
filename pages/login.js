@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../components/layout/Layout'
 import AuthService from '../service/auth.service';
+import Link from "next/link"
 
 function Blank() {
     const [message, setMessage] = useState(
@@ -36,9 +37,12 @@ function Blank() {
                                                 <label>Password</label>
                                                 <input name="password" type="password" class="form-control" placeholder="Enter email address" required/>
                                             </div>
-
-                                            <button type="submit" class="btn btn-primary">Login</button>
+                                            
+                                            <button type="submit" class="btn btn-primary" style={{"margin-right":"1%"}}>Login</button>
+                                            <button type="text" class="btn btn-primary"><Link href="/register">Register</Link></button>
                                         </form>
+                                       
+
                                     </div>
                                 </div>
                             </div>

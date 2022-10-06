@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 function Blank() {
     const router = useRouter();
     const [datas, setDatas] = useState([])
-    const BASE_URL = process.env.API_ENDPOINT_1;
+    const BASE_URL = process.env.API_ENDPOINT;
     const token = localStorage.getItem('token');
     const config = {
       headers: {
